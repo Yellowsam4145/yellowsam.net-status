@@ -1,2 +1,1 @@
-# error-code-yellowsam
-Error code handling for yellowsam.net
+Status handling for yellowsam.net
