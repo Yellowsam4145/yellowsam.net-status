@@ -1,7 +1,7 @@
 fetch('status.json?t=' + Date.now())
     .then(response => {
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`Error: ${response.status}`);
         }
         return response.json();
     })
@@ -15,6 +15,6 @@ fetch('status.json?t=' + Date.now())
     })
     .catch(error => {
         console.error('Error fetching status:', error);
-        document.getElementById('status').textContent = '⚠ Unable to fetch status';
+        document.getElementById('status').textContent = 'Unknown (Offline?)';
         document.getElementById('status').className = 'status';
     });
