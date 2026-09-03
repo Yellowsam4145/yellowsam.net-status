@@ -21,8 +21,13 @@ jobs:
           fi
       - name: Update status file
         run: |
-          echo "$(cat status.txt)" > status.json
-          echo "lastChecked=$(date)}" >> status.json
+          status=$(if curl -f https://yellowsam.net > /dev/null 2>&1; then echo "online"; else echo "offline"; fi)
+          cat > status.json << EOF
+          {
+            "status": "$status",
+            "lastChecked": "$(date)"
+          }
+          EOF
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
