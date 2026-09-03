@@ -1,0 +1,29 @@
+name: Status Check
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Every 5 minutes
+  workflow_dispatch:
+
+jobs:
+  check-status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check website status
+        run: |
+          if curl -f https://yellowsam.net > /dev/null 2>&1; then
+            echo "status=online" >> status.txt
+          else
+            echo "status=offline" >> status.txt
+          fi
+      - name: Update status file
+        run: |
+          echo "$(cat status.txt)" > status.json
+          echo "lastChecked=$(date)" >> status.json
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add status.json
+          git commit -m "Update status" || true
+          git push
