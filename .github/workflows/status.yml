@@ -15,14 +15,14 @@ jobs:
       - name: Check website status
         run: |
           if curl -f https://yellowsam.net > /dev/null 2>&1; then
-            echo "status=online" >> status.txt
+            echo "{status=online" >> status.txt
           else
-            echo "status=offline" >> status.txt
+            echo "{status=offline" >> status.txt
           fi
       - name: Update status file
         run: |
           echo "$(cat status.txt)" > status.json
-          echo "lastChecked=$(date)" >> status.json
+          echo "lastChecked=$(date)}" >> status.json
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
