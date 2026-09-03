@@ -5,11 +5,15 @@
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
         h1 { color: #333; }
+        .status { font-size: 24px; font-weight: bold; }
+        .online { color: green; }
+        .offline { color: red; }
     </style>
 </head>
 <body>
-    <h1>Not yet!</h1>
-    <p>status.yellowsam.net is under construction!</p>
-    <a href="https://yellowsam.net">Go to yellowsam.net home</a>
+    <h1>yellowsam.net Status</h1>
+    <div class="status" id="status">Checking...</div>
+    <p>Last checked: <span id="lastChecked">--</span></p>
+    <script src="status.js"></script>
 </body>
-</html>
+</html
